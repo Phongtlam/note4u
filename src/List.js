@@ -2,7 +2,7 @@ import React from 'react';
 
 const List = (props) => {
   return (
-    <div>
+    <div className="note-map">
       {props.noteArray.map((note, i) => {
         let noteClass = `note-list ${note.borderColor}`
         return (

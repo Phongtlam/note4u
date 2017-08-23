@@ -13,7 +13,7 @@ class App extends React.Component {
       title: '',
       body: '',
       isOpen: false,
-      isDelModal: false,
+      isRemvModal: false,
       noteArray: [],
     }
     this.clickPink = this.clickPink.bind(this);
@@ -26,6 +26,7 @@ class App extends React.Component {
     this.onTitleInput = this.onTitleInput.bind(this);
     this.onBodyInput = this.onBodyInput.bind(this);
     this.onDelete = this.onDelete.bind(this);
+    this.onTrashIconClick = this.onTrashIconClick.bind(this);
   }
 
   clickPink() {
@@ -91,8 +92,13 @@ class App extends React.Component {
     const removeNote = this.state.noteArray.indexOf(item);
   }
 
+  onTrashIconClick() {
+    this.setState({ isRemvModal: true });
+  }
+
   render() {
     const isOpen = this.state.isOpen;
+    const isRemvModal = this.state.isRemvModal;
     return (
       <div className="app">
         <div className="app-header">
@@ -101,9 +107,14 @@ class App extends React.Component {
             className="note-add button"> <span className="plus">+ </span> Add Note</button>
         </div>
         <div className="array-list">
-          <List noteArray={this.state.noteArray} onDelete={this.onDelete} />
+          <List noteArray={this.state.noteArray}
+            onTrashIconClick={this.onTrashIconClick}
+            onDelete={this.onDelete}
+          />
         </div>
-        <RemoveModal />
+        {isRemvModal?
+          <RemoveModal /> : null
+        }
         {isOpen?
           (<div className="note-main">
             <Note

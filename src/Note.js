@@ -6,7 +6,7 @@ class Note extends React.Component {
   }
 
   render() {
-    const borderColor = this.props.borderColor;
+    const borderColor = `note-display ${this.props.borderColor}`;
     return (
       <div className={borderColor}>
         <div className="color-picker-group">
