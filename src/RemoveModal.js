@@ -8,8 +8,8 @@ const RemoveModal = (props) => (
       Are you sure you want to delete this note?
     </div>
     <div className="button-group remove">
-      <button className="note-save button delete-btn">Delete</button>
-      <button className="note-cancel button cancel-btn">Cancel</button>
+      <button onClick={props.onDelete} className="note-save button delete-btn">Delete</button>
+      <button onClick={props.onTrashIconCancel} className="note-cancel button cancel-btn">Cancel</button>
     </div>
   </div>
 );

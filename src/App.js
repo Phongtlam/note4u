@@ -14,6 +14,10 @@ class App extends React.Component {
       body: '',
       isOpen: false,
       isRemvModal: false,
+      isEdit: false,
+      isEditing: false,
+      onRemvFocus: {},
+      onEditFocus: {},
       noteArray: [],
     }
     this.clickPink = this.clickPink.bind(this);
@@ -27,38 +31,81 @@ class App extends React.Component {
     this.onBodyInput = this.onBodyInput.bind(this);
     this.onDelete = this.onDelete.bind(this);
     this.onTrashIconClick = this.onTrashIconClick.bind(this);
+    this.onTrashIconCancel = this.onTrashIconCancel.bind(this);
+    this.onEdit = this.onEdit.bind(this);
+    this.onSaveEdit = this.onSaveEdit.bind(this);
   }
 
   clickPink() {
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
     this.setState({
       borderColor: 'note-card border-pink',
     })
   }
 
   clickAqua() {
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
     this.setState({
       borderColor: 'note-card border-aqua',
     })
   }
 
   clickYellow() {
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
     this.setState({
       borderColor: 'note-card border-yellow',
     })
   }
 
   clickBlue() {
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
     this.setState({
       borderColor: 'note-card border-blue',
     });
   }
 
   onTitleInput(title) {
-    this.setState({ title });
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
+    this.setState({
+      title,
+    });
   }
 
   onBodyInput(body) {
-    this.setState({ body });
+    if (this.state.isEdit) {
+      this.setState({
+        isEditing: true,
+        isEdit: false,
+      });
+    };
+    this.setState({
+      body,
+    });
   }
 
   onAdd() {
@@ -68,12 +115,20 @@ class App extends React.Component {
       title: '',
       body: '',
       isOpen: false,
-      isRemove: false,
+      isRemvModal: false,
+      isEditing: false,
     });
   }
 
   isOpen() {
-    this.setState({ isOpen: !this.state.isOpen })
+    this.setState({
+      isOpen: !this.state.isOpen,
+      title: '',
+      body: '',
+      isEdit: false,
+      isEditing: false,
+      onEditFocus: {},
+    });
   }
 
   addToNoteArray() {
@@ -87,13 +142,68 @@ class App extends React.Component {
     }));
   }
 
-  onDelete(item) {
-    console.log('this is i', this.state.noteArray.indexOf(item))
-    const removeNote = this.state.noteArray.indexOf(item);
+  onDelete() {
+    const indexRemove = this.state.noteArray.indexOf(this.state.onRemvFocus);
+    const noteArray = this.state.noteArray;
+    noteArray.splice(indexRemove, 1);
+    this.setState({
+      noteArray,
+    }, () => {
+      this.setState({
+        isRemvModal: false,
+        onRemvFocus: {},
+      });
+    });
   }
 
-  onTrashIconClick() {
-    this.setState({ isRemvModal: true });
+  onTrashIconClick(note) {
+    this.setState({
+      isRemvModal: true,
+      onRemvFocus: note,
+    });
+  }
+
+  onTrashIconCancel() {
+    this.setState({ isRemvModal: false });
+  }
+
+  onEdit(note) {
+    this.setState({
+      isEdit: true,
+      isOpen: true,
+    }, () => {
+      this.setState({
+        title: note.title,
+        body: note.body,
+        borderColor: note.borderColor,
+      }, () => {
+        this.setState({ onEditFocus: note });
+      });
+    });
+  }
+
+  onSaveEdit() {
+    console.log('hii')
+    const indexEdit = this.state.noteArray.indexOf(this.state.onEditFocus);
+    console.log(indexEdit)
+    const editNote = {
+      title: this.state.title,
+      body: this.state.body,
+      borderColor: this.state.borderColor,
+    };
+    const newNoteArray = this.state.noteArray;
+    newNoteArray[indexEdit] = editNote;
+    this.setState({
+      noteArray: newNoteArray,
+      borderColor: 'note-card border-pink',
+      title: '',
+      body: '',
+      isOpen: false,
+      isRemvModal: false,
+      isEdit: false,
+      isEditing: false,
+      onEditFocus: {},
+    });
   }
 
   render() {
@@ -107,20 +217,24 @@ class App extends React.Component {
             className="note-add button"> <span className="plus">+ </span> Add Note</button>
         </div>
         <div className="array-list">
-          <List noteArray={this.state.noteArray}
+          <List
+            onEdit={this.onEdit}
+            noteArray={this.state.noteArray}
             onTrashIconClick={this.onTrashIconClick}
             onDelete={this.onDelete}
+            isRemvModal={this.state.isRemvModal}
           />
         </div>
         {isRemvModal?
-          <RemoveModal /> : null
+          (<RemoveModal
+            onTrashIconCancel={this.onTrashIconCancel}
+            onDelete={this.onDelete}
+          />) : null
         }
         {isOpen?
           (<div className="note-main">
             <Note
-              borderColor={this.state.borderColor}
-              title={this.state.title}
-              body={this.state.body}
+              {...this.state}
               onTitleInput={this.onTitleInput}
               onBodyInput={this.onBodyInput}
               clickPink={this.clickPink}
@@ -128,6 +242,8 @@ class App extends React.Component {
               clickYellow={this.clickYellow}
               clickBlue={this.clickBlue}
               onAdd={this.onAdd}
+              isOpen={this.isOpen}
+              onSaveEdit={this.onSaveEdit}
             />
           </div>
           ) : (

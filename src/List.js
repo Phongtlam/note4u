@@ -6,14 +6,18 @@ const List = (props) => {
       {props.noteArray.map((note, i) => {
         let noteClass = `note-list ${note.borderColor}`
         return (
-          <div key={i} className={noteClass}>
-            <div className="note-single">
-              <h2 className="note-single-title">{note.title}</h2>
-              <a onClick={() => props.onDelete(note)} className="note-icon fa fa-trash" aria-hidden="true"></a>
-              <a className="note-icon fa fa-pencil" aria-hidden="true"></a>
+          <div key={i}>
+            <div className={noteClass}>
+              <div className="note-single">
+                <textarea className="note-list-body">{note.title}</textarea>
+                <div>
+                  <i onClick={() => props.onTrashIconClick(note)} className="note-icon fa fa-trash" aria-hidden="true"></i>
+                  <i onClick={() => props.onEdit(note)} className="note-icon fa fa-pencil" aria-hidden="true"></i>
+                </div>
+              </div>
+              <hr />
+              <textarea className="note-list-body">{note.body}</textarea>
             </div>
-            <hr />
-            {note.body}
           </div>
         )
       })}
