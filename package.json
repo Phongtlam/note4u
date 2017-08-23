@@ -17,6 +17,7 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "yarn run build"
   },
+  "homepage": "https://note4u.herokuapp.com/",
   "engines": {
     "node": "8.1.4"
   }
