@@ -1,16 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import List from './List';
 import Note from './Note';
+import RemoveModal from './RemoveModal';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       borderColor: 'note-card border-pink',
+      title: '',
+      body: '',
       isOpen: false,
+      isDelModal: false,
       noteArray: [],
     }
     this.clickPink = this.clickPink.bind(this);
@@ -20,6 +23,9 @@ class App extends React.Component {
     this.onAdd = this.onAdd.bind(this);
     this.isOpen = this.isOpen.bind(this);
     this.addToNoteArray = this.addToNoteArray.bind(this);
+    this.onTitleInput = this.onTitleInput.bind(this);
+    this.onBodyInput = this.onBodyInput.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   clickPink() {
@@ -43,27 +49,46 @@ class App extends React.Component {
   clickBlue() {
     this.setState({
       borderColor: 'note-card border-blue',
-    })
+    });
   }
 
-  onAdd(title, body) {
-    this.addToNoteArray(title, body);
-    this.setState({ isOpen: false });
+  onTitleInput(title) {
+    this.setState({ title });
+  }
+
+  onBodyInput(body) {
+    this.setState({ body });
+  }
+
+  onAdd() {
+    this.addToNoteArray();
+    this.setState({
+      borderColor: 'note-card border-pink',
+      title: '',
+      body: '',
+      isOpen: false,
+      isRemove: false,
+    });
   }
 
   isOpen() {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
-  addToNoteArray(title, body) {
+  addToNoteArray() {
     const newNote = {
-      title,
-      body,
+      title: this.state.title,
+      body: this.state.body,
       borderColor: this.state.borderColor,
     };
     this.setState(prevState => ({
       noteArray: prevState.noteArray.concat(newNote),
     }));
+  }
+
+  onDelete(item) {
+    console.log('this is i', this.state.noteArray.indexOf(item))
+    const removeNote = this.state.noteArray.indexOf(item);
   }
 
   render() {
@@ -75,22 +100,26 @@ class App extends React.Component {
             onClick={this.isOpen}
             className="note-add button"> <span className="plus">+ </span> Add Note</button>
         </div>
-        <div className="note-list">
-          {this.state.noteArray.map((note, i) =>
-            (<div key={i} className="fav-col">
-              <List note={note} />
-            </div>),
-          )}
+        <div className="array-list">
+          <List noteArray={this.state.noteArray} onDelete={this.onDelete} />
         </div>
+        <RemoveModal />
         {isOpen?
-          (<Note
-            borderColor={this.state.borderColor}
-            clickPink={this.clickPink}
-            clickAqua={this.clickAqua}
-            clickYellow={this.clickYellow}
-            clickBlue={this.clickBlue}
-            onAdd={this.onAdd}
-          />) : (
+          (<div className="note-main">
+            <Note
+              borderColor={this.state.borderColor}
+              title={this.state.title}
+              body={this.state.body}
+              onTitleInput={this.onTitleInput}
+              onBodyInput={this.onBodyInput}
+              clickPink={this.clickPink}
+              clickAqua={this.clickAqua}
+              clickYellow={this.clickYellow}
+              clickBlue={this.clickBlue}
+              onAdd={this.onAdd}
+            />
+          </div>
+          ) : (
             null
           )
         }

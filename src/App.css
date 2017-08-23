@@ -36,6 +36,10 @@
   outline: none !important;
 }
 
+.note-main {
+  position: fixed;
+  z-index: 3;
+}
 .note-card {
   /*position: relative;*/
   background-color: white;
@@ -71,7 +75,6 @@
 }
 
 .note-add {
-  /*position: relative;*/
   display: inline-block;
   float: right;
   clear: left;
@@ -88,7 +91,6 @@
 }
 
 .note-save {
-  /*position: absolute;*/
   float: right;
   background-color: #00d6f2;
   color: white;
@@ -99,7 +101,6 @@
 }
 
 .note-cancel {
-  /*position: absolute;*/
   float: left;
   background-color: #c9c9c9;
   color: white;
@@ -171,4 +172,67 @@
 
 .color-picker:focus, color-picker:active {
   border: 3px solid #00B4CC;
+}
+
+.array-list{
+  position: absolute;
+}
+.note-list {
+  height: 250px;
+  width: 300px;
+}
+
+.fa-pencil, .fa-trash {
+  color: #c9c9c9;
+}
+
+.note-single {
+  overflow: hidden;
+}
+
+.note-single-title {
+  display: inline-block;
+}
+
+.note-icon {
+  float: right;
+  padding: 10px;
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.note-icon:hover {
+  color: #90c7ec;
+}
+
+.remove-modal {
+  background-color: white;
+  box-shadow: 5px 5px 5px #888888;
+  position: fixed;
+  z-index: 3;
+  border-radius: 5px;
+  height: 250px;
+  width: 430px;
+}
+
+.remove {
+  padding: 25px;
+  position: relative;
+}
+
+.remove-top {
+  padding: 0 0 50px 50px;
+}
+
+.delete-btn {
+  position: relative;
+  /*float: right;*/
+  margin-left: 10px;
+  overflow: hidden;
+}
+
+.cancel-btn {
+  position: relative;
+  /*float: left;*/
+  overflow: hidden;
 }

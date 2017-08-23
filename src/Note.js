@@ -3,22 +3,6 @@ import React from 'react';
 class Note extends React.Component {
   constructor(props) {
     super(props);
-    this.onTitleInput = this.onTitleInput.bind(this);
-    this.onBodyInput = this.onBodyInput.bind(this);
-    this.onAdd = this.onAdd.bind(this);
-  }
-
-  onTitleInput(title) {
-    this.titleInputElem = title;
-  }
-
-  onBodyInput(body) {
-    this.bodyInputElem = body;
-  }
-
-  onAdd(e) {
-    e.preventDefault();
-    this.props.onAdd(this.titleInputElem.value, this.bodyInputElem.value)
   }
 
   render() {
@@ -36,12 +20,12 @@ class Note extends React.Component {
             type="text"
             className="note-title"
             placeholder="Untitled"
-            ref={this.onTitleInput}
+            onChange={(e) => this.props.onTitleInput(e.target.value)}
           />
           <textarea
             className="note-body"
             placeholder="Just start typing here"
-            ref={this.onBodyInput}
+            onChange={(e) => this.props.onBodyInput(e.target.value)}
           />
           <div className="button-group">
             <button
@@ -49,7 +33,7 @@ class Note extends React.Component {
               > Cancel
             </button>
             <button
-              onClick={this.onAdd}
+              onClick={this.props.onAdd}
               className="note-save button"
               > Add
             </button>
