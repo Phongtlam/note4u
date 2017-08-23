@@ -7,7 +7,6 @@
   color: white;
   margin: 0px;
   padding: 15px;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -224,6 +223,7 @@
   pointer-events: none;
   border: none;
   resize: none;
+  padding-left: 10px;
 }
 
 .fa-pencil, .fa-trash {
@@ -235,8 +235,14 @@
 }
 
 .note-single-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
   display: inline-block;
   height: 25px;
+  float: left;
+  padding-left: 10px;
 }
 
 .note-icon {
@@ -283,4 +289,9 @@
 .cancel-btn {
   position: relative;
   overflow: hidden;
+}
+
+.note-map-btn {
+  float: right;
+  margin-top: 5px;
 }

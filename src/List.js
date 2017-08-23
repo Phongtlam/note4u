@@ -9,8 +9,8 @@ const List = (props) => {
           <div key={i}>
             <div className={noteClass}>
               <div className="note-single">
-                <textarea className="note-list-body">{note.title}</textarea>
-                <div>
+                <h2 className="note-single-title">{note.title}</h2>
+                <div className="note-map-btn">
                   <i onClick={() => props.onTrashIconClick(note)} className="note-icon fa fa-trash" aria-hidden="true"></i>
                   <i onClick={() => props.onEdit(note)} className="note-icon fa fa-pencil" aria-hidden="true"></i>
                 </div>
