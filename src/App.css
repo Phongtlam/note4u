@@ -223,7 +223,7 @@
   pointer-events: none;
   border: none;
   resize: none;
-  padding-left: 10px;
+  white-space: pre-wrap;
 }
 
 .fa-pencil, .fa-trash {

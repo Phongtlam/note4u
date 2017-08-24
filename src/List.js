@@ -16,7 +16,7 @@ const List = (props) => {
                 </div>
               </div>
               <hr />
-              <textarea className="note-list-body">{note.body}</textarea>
+              <a className="note-list-body">{note.body}</a>
             </div>
           </div>
         )
