@@ -16,7 +16,7 @@ const List = (props) => {
                 </div>
               </div>
               <hr />
-              <a className="note-list-body">{note.body}</a>
+              <div className="parent-list-body"><a className="note-list-body">{note.body}</a></div>
             </div>
           </div>
         )
