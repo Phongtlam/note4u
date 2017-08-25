@@ -183,9 +183,7 @@ class App extends React.Component {
   }
 
   onSaveEdit() {
-    console.log('hii')
     const indexEdit = this.state.noteArray.indexOf(this.state.onEditFocus);
-    console.log(indexEdit)
     const editNote = {
       title: this.state.title,
       body: this.state.body,
