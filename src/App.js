@@ -7,10 +7,10 @@ import RemoveModal from './RemoveModal';
 
 var LinkedList = require('./LinkedList');
 
-const noteArray = new LinkedList.LinkedList();
-var node = new LinkedList.Node(1,1)
-console.log(' noteeee', noteArray)
-console.log('nodeeee', node)
+const list = new LinkedList.LinkedList();
+// var node = new LinkedList.Node(1,1)
+// console.log(' noteeee', noteArray)
+// console.log('nodeeee', node)
 
 class App extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class App extends React.Component {
       isEditing: false,
       onRemvFocus: {},
       onEditFocus: {},
-      noteArray: [],
+      noteArray: list,
     }
     this.clickPink = this.clickPink.bind(this);
     this.clickAqua = this.clickAqua.bind(this);
