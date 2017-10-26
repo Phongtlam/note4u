@@ -5,6 +5,13 @@ import List from './List';
 import Note from './Note';
 import RemoveModal from './RemoveModal';
 
+var LinkedList = require('./LinkedList');
+
+const noteArray = new LinkedList.LinkedList();
+var node = new LinkedList.Node(1,1)
+console.log(' noteeee', noteArray)
+console.log('nodeeee', node)
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -212,7 +219,7 @@ class App extends React.Component {
         <div className="app-header">
           <button
             onClick={this.isOpen}
-            className="note-add button"> <span className="plus">+ </span> Add Note</button>
+          className="note-add button"> <span className="plus">+ </span> Add Note</button>
         </div>
         <div className="array-list">
           <List
