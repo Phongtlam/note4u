@@ -29,15 +29,26 @@ LinkedList.prototype.remove = function(key) {
   delete this.hash[key];
 }
 
-// var list = new LinkedList();
-// var node = new Node(1,1)
-// var node2 = new Node(2,2)
-// var node3 = new Node(3,3)
-// list.add(node);
-// list.add(node2);
-// list.add(node3);
+LinkedList.prototype.map = function() {
+  var res = [];
+  var curr = this.head.next;
+  while(curr !== this.tail) {
+    res.push(curr.val);
+    curr = curr.next;
+  }
+  return res;
+}
+
+var list = new LinkedList();
+var node = new Node(1,1)
+var node2 = new Node(2,2)
+var node3 = new Node(3,3)
+list.add(node);
+list.add(node2);
+list.add(node3);
 // list.remove(3)
-// console.log(list)
+var x = list.map()
+console.log(x)
 
 module.exports = {
   LinkedList,

@@ -5,12 +5,18 @@ import List from './List';
 import Note from './Note';
 import RemoveModal from './RemoveModal';
 
-var LinkedList = require('./LinkedList');
+var DS = require('./LinkedList');
+var LinkedList = DS.LinkedList;
+var Node = DS.Node;
 
-const list = new LinkedList.LinkedList();
-// var node = new LinkedList.Node(1,1)
-// console.log(' noteeee', noteArray)
-// console.log('nodeeee', node)
+var list = new LinkedList();
+// var node = new Node(1,1)
+// var node2 = new Node(2,2)
+// var node3 = new Node(3,3)
+// list.add(node);
+// list.add(node2);
+// list.add(node3);
+// console.log('mapping', list.map())
 
 class App extends React.Component {
   constructor(props) {
@@ -26,6 +32,7 @@ class App extends React.Component {
       onRemvFocus: {},
       onEditFocus: {},
       noteArray: list,
+      index: 0,
     }
     this.clickPink = this.clickPink.bind(this);
     this.clickAqua = this.clickAqua.bind(this);
@@ -144,9 +151,16 @@ class App extends React.Component {
       body: this.state.body,
       borderColor: this.state.borderColor,
     };
+    this.setState({
+      index: this.state.index + 1,
+    });
+    const newNode = new Node(this.state.index, newNote);
     this.setState(prevState => ({
-      noteArray: prevState.noteArray.concat(newNote),
-    }));
+      noteArray: prevState.noteArray.add(newNode),
+    }))
+    // this.setState(prevState => ({
+    //   noteArray: prevState.noteArray.concat(newNote),
+    // }));
   }
 
   onDelete() {
@@ -234,7 +248,7 @@ class App extends React.Component {
           (<RemoveModal
             onTrashIconCancel={this.onTrashIconCancel}
             onDelete={this.onDelete}
-          />) : null
+           />) : null
         }
         {isOpen?
           (<div className="note-main">
