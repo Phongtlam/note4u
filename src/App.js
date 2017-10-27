@@ -9,14 +9,7 @@ var DS = require('./LinkedList');
 var LinkedList = DS.LinkedList;
 var Node = DS.Node;
 
-var list = new LinkedList();
-// var node = new Node(1,1)
-// var node2 = new Node(2,2)
-// var node3 = new Node(3,3)
-// list.add(node);
-// list.add(node2);
-// list.add(node3);
-// console.log('mapping', list.map())
+// var list = DS.list;
 
 class App extends React.Component {
   constructor(props) {
@@ -31,7 +24,7 @@ class App extends React.Component {
       isEditing: false,
       onRemvFocus: {},
       onEditFocus: {},
-      noteArray: list,
+      noteArray: [],
       index: 0,
     }
     this.clickPink = this.clickPink.bind(this);
@@ -153,14 +146,21 @@ class App extends React.Component {
     };
     this.setState({
       index: this.state.index + 1,
-    });
-    const newNode = new Node(this.state.index, newNote);
-    this.setState(prevState => ({
-      noteArray: prevState.noteArray.add(newNode),
-    }))
-    // this.setState(prevState => ({
-    //   noteArray: prevState.noteArray.concat(newNote),
-    // }));
+    }, () => {
+      // var newNode = new Node(this.state.index, newNote);
+      // console.log('noteArray', this.state.noteArray)
+      // console.log('new Node', newNode)
+      // var newList = this.state.noteArray.add(newNode)
+      // this.setState(prevState => ({
+      //   noteArray: newList,
+      // }))
+      // this.setState({
+      //   noteArray: newList,
+      // })
+      this.setState(prevState => ({
+        noteArray: prevState.noteArray.concat(newNote),
+      }));
+    })
   }
 
   onDelete() {

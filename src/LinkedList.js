@@ -40,17 +40,18 @@ LinkedList.prototype.map = function() {
 }
 
 var list = new LinkedList();
-var node = new Node(1,1)
-var node2 = new Node(2,2)
-var node3 = new Node(3,3)
-list.add(node);
-list.add(node2);
-list.add(node3);
-// list.remove(3)
-var x = list.map()
-console.log(x)
+// var node = new Node(1,1)
+// var node2 = new Node(2,2)
+// var node3 = new Node(3,3)
+// list.add(node);
+// list.add(node2);
+// list.add(node3);
+// // list.remove(3)
+// var x = list.map()
+// console.log(x)
 
 module.exports = {
   LinkedList,
   Node,
+  list,
 }
