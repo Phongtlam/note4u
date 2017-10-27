@@ -1,7 +1,7 @@
 import React from 'react';
 
 const List = (props) => {
-  var arrayMap = props.noteArray;
+  // var arrayMap = props.noteArray;
   // console.log('arrayMap', arrayMap)
   return (
     <div className="note-map">
